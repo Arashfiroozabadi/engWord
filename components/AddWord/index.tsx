@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Keyboard } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import { Text, Button, View, TextInput } from "../Themed";
@@ -17,7 +17,6 @@ interface WordType {
 type Props = {
   close: () => void;
 };
-
 function AddWrod(props: Props): JSX.Element {
   const [Word, setWord] = useState<WordType>({
     word: "",
@@ -34,6 +33,7 @@ function AddWrod(props: Props): JSX.Element {
   }
 
   function handleAdd(): void {
+    Keyboard.dismiss();
     dispatch(addNewWord(Word));
     setWord({ word: "", meaning: "" });
   }
