@@ -1,22 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React from "react";
+import ReactNative from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Provider } from "react-redux";
 
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export default function App() {
+import useCachedResources from "./hooks/useCachedResources";
+import Navigation from "./navigation";
+import store from "./redux";
+
+try {
+  ReactNative.I18nManager.allowRTL(false);
+} catch (e) {
+  // eslint-disable-next-line no-console
+  console.log(e);
+}
+
+export default function App(): JSX.Element | null {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
+        <Provider store={store}>
+          <Navigation />
+          <StatusBar backgroundColor="#0b3a90" />
+        </Provider>
       </SafeAreaProvider>
     );
   }
