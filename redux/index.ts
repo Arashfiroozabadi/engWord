@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import AsyncStorage from "@react-native-community/async-storage";
+import { updateWords } from "./Action";
 
 type Theme = "dark" | "light";
 type ThemeAction = {
@@ -12,6 +13,14 @@ const initialState: Theme = "dark";
 const storeData = async (value: string): Promise<any> => {
   try {
     await AsyncStorage.setItem("theme", value);
+  } catch (e) {
+    // saving error
+  }
+};
+const storeObject = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("allwords", jsonValue);
   } catch (e) {
     // saving error
   }
@@ -40,6 +49,7 @@ interface WORDS {
   word: string;
 }
 interface ActionType {
+  all: Array<WORDS>;
   item: {
     meaning: string;
     word: string;
@@ -49,10 +59,15 @@ interface ActionType {
 }
 function words(state = initWords, action: ActionType): WORDS[] {
   switch (action.type) {
-    case "add":
+    case "add": {
+      const finalState = [...state, action.item];
+      storeObject(finalState);
       return [...state, action.item];
+    }
     case "remove":
       return state.filter((e) => e.word !== action.removeTarget);
+    case "updateWords":
+      return action.all;
     default:
       return state;
   }
@@ -77,6 +92,17 @@ const store = createStore(
   combineReducers({ count: counter, theme: theme, words: words }),
   applyMiddleware(thunk)
 );
+
+const getMyStringValue = async (): Promise<any> => {
+  try {
+    const data: any = await AsyncStorage.getItem("allwords");
+
+    store.dispatch(updateWords(JSON.parse(data)));
+  } catch (e) {
+    // read error
+  }
+};
+getMyStringValue();
 
 AsyncStorage.getItem("theme", (err, res) => {
   if (err) {
