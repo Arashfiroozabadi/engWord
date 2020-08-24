@@ -1,12 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Platform,
-  StatusBar,
-  Modal,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Platform, StatusBar, Modal } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { useSelector, useDispatch } from "react-redux";
@@ -31,15 +25,6 @@ function HomeScreen({
 
   function close(): void {
     setModalVisible(!modalVisible);
-  }
-
-  const [timesPressed, setTimesPressed] = useState(0);
-
-  let textLog = "";
-  if (timesPressed > 1) {
-    textLog = timesPressed + "x onPress";
-  } else if (timesPressed > 0) {
-    textLog = "onPress";
   }
 
   useEffect(() => {
@@ -84,24 +69,6 @@ function HomeScreen({
         />
       </View>
       <ListItems />
-      {/* <Pressable
-        onPress={() => {
-          setTimesPressed((current) => current + 1);
-        }}
-        style={({ pressed }) => [
-          {
-            backgroundColor: pressed ? "rgb(210, 230, 255)" : "white",
-          },
-          styles.wrapperCustom,
-        ]}
-      >
-        {({ pressed }) => (
-          <Text style={styles.text}>{pressed ? "Pressed!" : "Press Me"}</Text>
-        )}
-      </Pressable> */}
-      <View style={styles.logBox}>
-        <Text testID="pressable_press_console">{textLog}</Text>
-      </View>
     </View>
   );
 }
@@ -123,20 +90,6 @@ const styles = StyleSheet.create({
     borderRadius: BoxModel.radius,
     marginTop: 5,
     marginBottom: 10,
-  },
-  text: {
-    fontSize: 16,
-  },
-  wrapperCustom: {
-    borderRadius: 8,
-    padding: 6,
-  },
-  logBox: {
-    padding: 20,
-    margin: 10,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "#f0f0f0",
-    backgroundColor: "#f9f9f9",
   },
 });
 
