@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { useSelector, useDispatch } from "react-redux";
 
-import { View, Button, Text } from "../components/Themed";
+import { View, Button } from "../components/Themed";
 import { RootStackParamList } from "../types";
 import useColorScheme from "../hooks/useColorScheme";
 import Colors from "../constants/Colors";
@@ -14,12 +14,12 @@ import AddWrod from "../components/AddWord";
 import ListItems from "../components/ListItems";
 
 function HomeScreen({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   navigation,
 }: DrawerScreenProps<RootStackParamList, "Home">): JSX.Element {
   const [modalVisible, setModalVisible] = useState(false);
 
   const colorScheme = useColorScheme();
-  const Theme = useSelector((state: { theme: string }) => state.theme);
   const word = useSelector((state: { words: any }) => state.words);
   const dispatch = useDispatch();
 
@@ -33,10 +33,9 @@ function HomeScreen({
         const theme = await AsyncStorage.getItem("theme");
         if (theme !== null) {
           dispatch({ type: theme });
-          // setTheme(theme);
         }
       } catch (err) {
-        alert(err);
+        return null;
       }
     };
     load();
@@ -77,7 +76,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: 1000,
-    // alignItems: "center",
     ...Platform.select({
       android: {
         marginTop: StatusBar.currentHeight,
@@ -86,7 +84,6 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 10,
-    // borderWidth: 1,
     borderRadius: BoxModel.radius,
     marginTop: 5,
     marginBottom: 10,
