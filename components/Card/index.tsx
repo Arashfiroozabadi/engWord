@@ -44,6 +44,7 @@ function Card(props: Props): JSX.Element {
 
 const styles = StyleSheet.create({
   root: {
+    width: 170,
     margin: BoxModel.btnMargin,
     padding: BoxModel.cardPadding,
     borderWidth: 1,
