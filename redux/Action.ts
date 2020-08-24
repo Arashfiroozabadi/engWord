@@ -14,6 +14,12 @@ type remove = {
   removeTarget: string;
   type: string;
 };
+type update = {
+  all: Array<Data>;
+  type: string;
+};
+type all = Array<Data>;
+
 export function addNewWord(data: Data): addNew {
   return {
     type: "add",
@@ -21,6 +27,13 @@ export function addNewWord(data: Data): addNew {
       word: data.word,
       meaning: data.meaning,
     },
+  };
+}
+
+export function updateWords(all: all): update {
+  return {
+    type: "updateWords",
+    all,
   };
 }
 
