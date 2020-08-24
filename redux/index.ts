@@ -17,7 +17,7 @@ const storeData = async (value: string): Promise<any> => {
     // saving error
   }
 };
-const storeObject = async (value) => {
+const storeObject = async (value: any): Promise<any> => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("allwords", jsonValue);
