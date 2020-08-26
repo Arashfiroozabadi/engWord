@@ -7,17 +7,22 @@ export default {
     addText: "#ffffffa3",
     caption: "#fff",
     title: "#c1c1c1",
+    deleteTextColor: "red",
 
-    cardBGC: "#006fbd70",
+    deleteIconColor: "red",
+
+    cardBGC: "#0a131b",
     cardBorderColor: "#a5a5a566",
-    cardWordTextBGC: "#a5a5a566",
+    cardWordTextBGC: "#0986d0",
     cardWordTextColor: "#e6e6e6b8",
 
     tint: tintColorDark,
     icons: "#fff",
+
     button: "#f4511e",
     buttonBGC: "#006fbd",
     buttonBorderColor: "#ffffff29",
+    delButtonBGC: "black",
 
     headerBGC: "#20232a",
     headerColor: "#aeb5bd",
@@ -41,6 +46,9 @@ export default {
     addText: "#ffffffd9",
     caption: "#fff",
     title: "#404040",
+    deleteTextColor: "red",
+
+    deleteIconColor: "red",
 
     cardBGC: "#ffffff",
     cardBorderColor: "#a5a5a566",
@@ -53,6 +61,7 @@ export default {
     button: "#61dafb",
     buttonBGC: "#61dafb",
     buttonBorderColor: "#ffffff5c",
+    delButtonBGC: "#fff",
 
     headerBGC: "#c3c3c357",
     headerColor: "#3c4146",
