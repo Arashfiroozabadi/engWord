@@ -46,7 +46,7 @@ function Setting({
         </View>
         <Button
           onPress={() => navigation.navigate("Home")}
-          title="Go to notifications"
+          title="Go to Home"
         />
       </View>
     </View>
