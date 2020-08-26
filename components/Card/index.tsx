@@ -6,15 +6,17 @@ import BoxModel from "../../constants/BoxModel";
 import useColorScheme from "../../hooks/useColorScheme";
 import { View, Text } from "../Themed";
 import { Data } from "../../redux/Action";
+import Btn from "../Btn";
 
 type Props = {
   data: Data;
+  onDelete: () => void;
 };
 
 function Card(props: Props): JSX.Element {
   const colorScheme = useColorScheme();
 
-  const { data } = props;
+  const { data, onDelete } = props;
   return (
     <View
       style={{
@@ -23,21 +25,33 @@ function Card(props: Props): JSX.Element {
         ...styles.root,
       }}
     >
-      <Text
-        style={{
-          backgroundColor: Colors[colorScheme].cardWordTextBGC,
-          ...styles.word,
-        }}
-      >
-        {data.word}
-      </Text>
-      <Text
-        style={{
-          ...styles.meaning,
-        }}
-      >
-        {data.meaning}
-      </Text>
+      <View>
+        <Text
+          style={{
+            color: Colors[colorScheme].cardWordTextColor,
+            backgroundColor: Colors[colorScheme].cardWordTextBGC,
+            ...styles.word,
+          }}
+        >
+          {data.word}
+        </Text>
+        <Text
+          style={{
+            ...styles.meaning,
+          }}
+        >
+          {data.meaning}
+        </Text>
+      </View>
+      <View>
+        <Btn
+          iconSize={35}
+          fullSize
+          Delete
+          title="x"
+          onPress={() => onDelete()}
+        />
+      </View>
     </View>
   );
 }
