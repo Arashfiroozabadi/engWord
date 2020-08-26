@@ -40,6 +40,7 @@ function RootNavigator(): JSX.Element {
       initialRouteName="Home"
       drawerType="slide"
       overlayColor="black"
+      backBehavior="initialRoute"
       drawerContentOptions={{
         // activeTintColor: "#e91e63",
         itemStyle: { marginVertical: 5 },
@@ -47,11 +48,6 @@ function RootNavigator(): JSX.Element {
     >
       <Drawer.Screen name="Home" component={HomeScreen} />
       <Drawer.Screen name="Setting" component={Setting} />
-      <Drawer.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Oops!" }}
-      />
     </Drawer.Navigator>
   );
 }

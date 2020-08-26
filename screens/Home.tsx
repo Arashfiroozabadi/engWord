@@ -1,6 +1,14 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { StyleSheet, Platform, StatusBar, Modal } from "react-native";
+import { useEffect, useState, useCallback } from "react";
+import {
+  StyleSheet,
+  Platform,
+  StatusBar,
+  Modal,
+  BackHandler,
+  Alert,
+  NativeModules,
+} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,9 +20,9 @@ import Colors from "../constants/Colors";
 import BoxModel from "../constants/BoxModel";
 import AddWrod from "../components/AddWord";
 import ListItems from "../components/ListItems";
+import { useFocusEffect } from "@react-navigation/native";
 
 function HomeScreen({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   navigation,
 }: DrawerScreenProps<RootStackParamList, "Home">): JSX.Element {
   const [modalVisible, setModalVisible] = useState(false);
@@ -41,7 +49,45 @@ function HomeScreen({
     load();
 
     return;
-  }, [dispatch, word]);
+  }, [dispatch, navigation, word]);
+
+  useFocusEffect(
+    useCallback(() => {
+      const lang = NativeModules.I18nManager.localeIdentifier;
+
+      const backAction = (): boolean => {
+        Alert.alert(
+          lang === "en_US" || lang === "en_GB" ? "Hold on!" : "صبر کن کجا",
+          lang === "en_US" || lang === "en_GB"
+            ? "Are you sure you want to Exit 😐?"
+            : "میخوای برنامه رو ببندی 😐",
+          [
+            {
+              text:
+                lang === "en_US" || lang === "en_GB"
+                  ? "Cancel 😍"
+                  : "نه عزیزم 😍",
+              onPress: () => null,
+              style: "cancel",
+            },
+            {
+              text:
+                lang === "en_US" || lang === "en_GB"
+                  ? "YES 😎"
+                  : "آره ببندش 😎",
+              onPress: () => BackHandler.exitApp(),
+            },
+          ]
+        );
+        return true;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", backAction);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", backAction);
+    }, [])
+  );
 
   return (
     <View style={{ ...styles.container }}>
