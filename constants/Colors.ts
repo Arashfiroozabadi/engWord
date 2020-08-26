@@ -11,6 +11,7 @@ export default {
     cardBGC: "#006fbd70",
     cardBorderColor: "#a5a5a566",
     cardWordTextBGC: "#a5a5a566",
+    cardWordTextColor: "#e6e6e6b8",
 
     tint: tintColorDark,
     icons: "#fff",
@@ -41,9 +42,10 @@ export default {
     caption: "#fff",
     title: "#404040",
 
-    cardBGC: "#006fbd70",
+    cardBGC: "#ffffff",
     cardBorderColor: "#a5a5a566",
-    cardWordTextBGC: "#a5a5a566",
+    cardWordTextBGC: "#0aaaf7b8",
+    cardWordTextColor: "#eaeaea",
 
     tint: tintColorLight,
     icons: "black",
