@@ -11,6 +11,7 @@ import store from "./redux";
 
 try {
   ReactNative.I18nManager.allowRTL(false);
+  ReactNative.I18nManager.forceRTL(false);
 } catch (e) {
   // eslint-disable-next-line no-console
   console.log(e);
