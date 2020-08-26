@@ -1,6 +1,7 @@
 export default {
   btnMargin: 5,
   btnPadding: 10,
+  delBtnMargin: 2,
 
   cardMargin: 5,
   cardPadding: 10,
