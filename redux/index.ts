@@ -64,8 +64,11 @@ function words(state = initWords, action: ActionType): WORDS[] {
       storeObject(finalState);
       return [...state, action.item];
     }
-    case "remove":
-      return state.filter((e) => e.word !== action.removeTarget);
+    case "remove": {
+      const finalState = state.filter((e) => e.word !== action.removeTarget);
+      storeObject(finalState);
+      return finalState;
+    }
     case "updateWords":
       return action.all;
     default:
