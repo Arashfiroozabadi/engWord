@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, Keyboard } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { Text, Button, View, TextInput } from "../Themed";
+import { Button, View, TextInput } from "../Themed";
 import Title from "../Title";
 import BoxModel from "../../constants/BoxModel";
 import Divider from "../Divider";
 import Btn from "../Btn";
-import { addNewWord, removeWord } from "../../redux/Action";
+import { addNewWord } from "../../redux/Action";
 
 interface WordType {
   meaning: string;
@@ -22,9 +22,6 @@ function AddWrod(props: Props): JSX.Element {
     word: "",
     meaning: "",
   });
-
-  const theme = useSelector((state: any) => state.theme);
-  const words = useSelector((state: any) => state.words);
 
   const dispatch = useDispatch();
 
@@ -50,7 +47,6 @@ function AddWrod(props: Props): JSX.Element {
             onChangeText={(text) => handleChangeText(text, "word")}
             styles={styles.textInput}
           />
-          {/* <Divider /> */}
           <TextInput
             value={Word.meaning}
             placeholder="Meaning"
@@ -63,18 +59,7 @@ function AddWrod(props: Props): JSX.Element {
         </View>
       </View>
       <View>
-        {words.map((item: { meaning: string; word: string }) => (
-          <Text key={item.word} onPress={() => dispatch(removeWord(item.word))}>
-            {item.word + " === " + item.meaning}
-          </Text>
-        ))}
-        <Button
-          title="theme"
-          onPress={() =>
-            dispatch({ type: theme === "dark" ? "light" : "dark" })
-          }
-        />
-        <Button title="X" onPress={() => props.close()} />
+        <Button title="Go back" onPress={() => props.close()} />
       </View>
     </View>
   );
@@ -92,6 +77,7 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   row: {
+    marginTop: 100,
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
